@@ -1,12 +1,22 @@
 {
   "name": "jc-lesson",
-  "version": "0.0.1",
-  "dependencies": {
-    "png-word": "0.0.6",
-    "random-word": "github:brighthas/random-word"
+  "version": "1.0.0",
+  "description": "it is iis",
+  "main": "database.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jcshawn/jc-lesson.git"
-  }
+    "url": "git+https://github.com/jcshawn/jc-lesson.git"
+  },
+  "author": "jc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcshawn/jc-lesson/issues"
+  },
+  "homepage": "https://github.com/jcshawn/jc-lesson#readme"
 }
