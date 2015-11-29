@@ -12,6 +12,7 @@ actionRepos['/update'] = require('./action/update');
 actionRepos['/'] = require('./action/index');
 actionRepos['/login'] = require('./action/login');
 actionRepos['/logout'] = require('./action/logout');
+actionRepos['/vnum'] = require('./action/vnum');
 
 http.createServer(function(request,response){
     request.session = session(request,response);
