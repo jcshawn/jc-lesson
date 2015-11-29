@@ -17,6 +17,9 @@ class AbstractPager{
                 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
                 </head>
                 <body class="container">
+                <div class="jumbotron">
+                    <h1>Node.js Blog Demo</h1>
+                </div>
                 <div>
                 ${this.isLogined ? `` : `<a class="btn btn-success" href="/login">登录</a>`}
                 ${this.isLogined ? `<a class="btn btn-default" href="/logout">退出</a><a class="btn btn-success" href="/add">添加</a>`:``}
