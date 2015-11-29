@@ -10,7 +10,7 @@ module.exports = function (req, res) {
         post(req).then(data=>{
             var loginname = data.loginname;
             var password = data.password;
-            if(loginname && password && loginname==='jc' && password==='123456') {
+            if(req.session.vnum===data.vnum && loginname && password && loginname==='jc' && password==='123456') {
                 req.session.isLogined = true;
                 IndexAction(req,res);
             } else {
@@ -20,6 +20,9 @@ module.exports = function (req, res) {
                 }
                 if(!(password && password==='123456')) {
                     errors.password = '密码有误,请重新输入';
+                }
+                if(!(req.session.vnum===data.vnum)) {
+                    errors.vnum = '验证码输入错误,请重新输入';
                 }
                 res.end(new LoginPager(errors,req.session.isLogined).render());
             }
