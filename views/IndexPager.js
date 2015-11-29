@@ -3,8 +3,8 @@
 var AbstractPager = require('./AbstractPager');
 
 class IndexPager extends AbstractPager {
-    constructor(articleList) {
-        super();
+    constructor(articleList, isLogined) {
+        super(isLogined);
         this.list = articleList;
     }
     _render(){

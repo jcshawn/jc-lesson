@@ -5,9 +5,16 @@ var query = require('./query');
 var post = require('./post');
 var database = require('../database');
 
-var indexAction = require('./index');
+var IndexAction = require('./index');
+var LoginAction = require('./login')
 
 module.exports = function (req, res) {
+
+    if(!(req.session.isLogined)) {
+        LoginAction(req,res);
+        return;
+    }
+
     if(req.method == "GET") {
         let data = query(req);
         if(!data.id) {
@@ -20,7 +27,7 @@ module.exports = function (req, res) {
 
         let article = database.list()[id];
         let errors = {};
-        res.end(new EditPager(id,article,errors).render());
+        res.end(new EditPager(id,article,errors,req.session.isLogined).render());
     } else { //post
         post(req).then(function(data){
             var errors = {};
@@ -34,14 +41,13 @@ module.exports = function (req, res) {
             let id = data.id;
             let article = database.list()[id];
 
-            console.log(data);
             if(Object.keys(errors).length) {
 
-                res.end(new EditPager(id,article,errors).render());
+                res.end(new EditPager(id,article,errors,req.session.isLogined).render());
             } else{
                 let newArticle = {title:data.title,body:data.body};
                 database.update(id,newArticle);
-                indexAction(req,res);
+                IndexAction(req,res);
             }
         });
     }

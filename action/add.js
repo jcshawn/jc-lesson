@@ -2,13 +2,17 @@
 
 var database = require('../database');
 var AddPager = require('../views/AddPager');
-var IndexPager = require('../views/IndexPager');
-
+var IndexAction = require("./index");
+var LoginAction = require('./login');
 var post = require('./post');
 
 module.exports = function (req, res) {
+    if(!(req.session.isLogined)) {
+        LoginAction(req,res);
+        return;
+    }
     if(req.method == 'GET') {
-        res.end(new AddPager('').render());
+        res.end(new AddPager({},req.session.isLogined).render());
     } else {
         post(req).then(function (data) {
             var errors = {};
@@ -19,12 +23,11 @@ module.exports = function (req, res) {
                 errors.body = "body char length >= 10";
             }
 
-            console.log(data);
             if(Object.keys(errors).length) {
-                res.end(new AddPager(errors).render());
+                res.end(new AddPager(errors,req.session.isLogined).render());
             } else{
                 database.add(data);
-                res.end(new IndexPager(database.list()).render());
+                IndexAction(req,res);
             }
         })
     }

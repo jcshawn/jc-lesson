@@ -2,7 +2,8 @@
 var query = require('./query');
 var post = require('./post');
 var database = require('../database');
-var IndexPager = require('../views/IndexPager');
+var IndexAction = require('./index');
+var LoginAction = require('./login');
 
 function getId(req,callback) {
     if(req.method=="GET") {
@@ -18,12 +19,15 @@ function getId(req,callback) {
 
 module.exports = function (req, res) {
 
-
+    if(!(req.session.isLogined)) {
+        LoginAction(req,res);
+        return;
+    }
 
 
     getId(req,id=>{
         database.del(id);
-        res.end(new IndexPager(database.list()).render());
+        IndexAction(req,res);
     });
 
     //getId(req,function(id){

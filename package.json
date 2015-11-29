@@ -1,0 +1,12 @@
+{
+  "name": "jc-lesson",
+  "version": "0.0.1",
+  "dependencies": {
+    "png-word": "0.0.6",
+    "random-word": "github:brighthas/random-word"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jcshawn/jc-lesson.git"
+  }
+}

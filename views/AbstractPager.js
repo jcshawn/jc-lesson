@@ -1,8 +1,8 @@
 "use strict";
 
 class AbstractPager{
-    constructor(){
-
+    constructor(isLogined){
+        this.isLogined = isLogined;
     }
     /*子类必须实现*/
     _render(){
@@ -17,6 +17,10 @@ class AbstractPager{
                 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
                 </head>
                 <body class="container">
+                <div>
+                ${this.isLogined ? `` : `<a class="btn btn-success" href="/login">登录</a>`}
+                ${this.isLogined ? `<a class="btn btn-default" href="/logout">退出</a><a class="btn btn-success" href="/add">添加</a>`:``}
+                </div>
                 ${this._render()}
                 </body>
                 </html>

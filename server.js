@@ -10,8 +10,13 @@ actionRepos['/add'] = require('./action/add');
 actionRepos['/del'] = require('./action/del');
 actionRepos['/update'] = require('./action/update');
 actionRepos['/'] = require('./action/index');
+actionRepos['/login'] = require('./action/login');
+actionRepos['/logout'] = require('./action/logout');
 
 http.createServer(function(request,response){
+    request.session = session(request,response);
+    console.log(request.session);
+
     response.writeHead(200,{'Content-type':'text/html'});
     let pathname = url.parse(request.url).pathname;
 
